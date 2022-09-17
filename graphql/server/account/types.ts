@@ -5,21 +5,18 @@ const AccountTypes = gql`
     id: ID
     email: String
     password: String
-    link: String
     user: User
   }
 
   input AccountCreateInput {
     email: String!
     password: String!
-    link: String!
     user_id: String!
   }
 
   input AccountUpdateInput {
     email: String
     password: String
-    link: String
     user_id: String
   }
 
