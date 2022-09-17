@@ -23,6 +23,7 @@ CREATE TABLE "Account" (
 -- CreateTable
 CREATE TABLE "Artwork" (
     "id" TEXT NOT NULL,
+    "api_id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "link" TEXT NOT NULL,
@@ -41,6 +42,9 @@ CREATE TABLE "_ArtworkToUser" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_email_key" ON "Account"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Artwork_api_id_key" ON "Artwork"("api_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_ArtworkToUser_AB_unique" ON "_ArtworkToUser"("A", "B");
