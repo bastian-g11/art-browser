@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-micro';
 const ArtworkTypes = gql`
   type Artwork {
     id: ID
+    api_id: String
     title: String
     author: String
     link: String
@@ -11,6 +12,7 @@ const ArtworkTypes = gql`
   }
 
   input ArtworkCreateInput {
+    api_id: String!
     title: String!
     author: String!
     link: String!
@@ -18,6 +20,7 @@ const ArtworkTypes = gql`
   }
 
   input ArtworkUpdateInput {
+    api_id: String
     title: String
     author: String
     link: String
