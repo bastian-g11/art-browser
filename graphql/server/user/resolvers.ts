@@ -15,6 +15,16 @@ const UserResolvers: Resolver = {
       });
       return artworks;
     },
+    accounts: async (parent, args) => {
+      const accounts = await prisma.account.findMany({
+        where: {
+          user_id: {
+            equals: parent.id,
+          },
+        },
+      });
+      return accounts;
+    },
   },
   Query: {
     getUser: async (parent, args) => {
