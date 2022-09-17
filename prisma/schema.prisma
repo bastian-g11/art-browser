@@ -9,3 +9,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id       String    @id @default(cuid())
+  name     String
+  accounts Account[]
+  artworks Artwork[]
+
+  creation_date DateTime @default(now())
+  update_date   DateTime @updatedAt
+}
+
+model Account {
+  id       String @id @default(cuid())
+  email    String @unique
+  password String
+  user     User   @relation(fields: [user_id], references: [id])
+  user_id  String
+
+  creation_date DateTime @default(now())
+  update_date   DateTime @updatedAt
+}
+
+model Artwork {
+  id        String @id @default(cuid())
+  title     String
+  author    String
+  link      String
+  site_link String
+  users     User[]
+
+  creation_date DateTime @default(now())
+  update_date   DateTime @updatedAt
+}
