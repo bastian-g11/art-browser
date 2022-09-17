@@ -1,7 +1,8 @@
 {
-  "name": "next-gql-boilerplate",
+  "name": "art-browser",
   "version": "0.1.0",
   "private": true,
+  "author": "bastian-g11 <sgr00114@gmail.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
