@@ -33,6 +33,7 @@ model Account {
 
 model Artwork {
   id        String @id @default(cuid())
+  api_id    String @unique
   title     String
   author    String
   link      String
