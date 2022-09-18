@@ -3,15 +3,15 @@ import { ArtworkItem } from 'components/ArtworkItem';
 import { Artwork } from 'types';
 
 interface ArtworkGridProps {
-  category: string;
+  query: string;
 }
 
-const ArtworkGrid = ({ category }: ArtworkGridProps) => {
-  const { artworks, isLoading } = useFetchArtworks(category);
+const ArtworkGrid = ({ query }: ArtworkGridProps) => {
+  const { artworks, isLoading } = useFetchArtworks(query);
 
   return (
     <>
-      <h3>{category}</h3>
+      <h3>{query}</h3>
 
       {isLoading && <h2>Loading..</h2>}
 

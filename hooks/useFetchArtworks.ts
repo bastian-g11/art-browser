@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
 import { getArtworks } from 'services/getArtworks';
 
-const useFetchArtworks = (category: string) => {
+const useFetchArtworks = (query: string) => {
   const [artworks, setArtworks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // TODO: Refactor method name
-  const search = async (_category: string) => {
-    const images = await getArtworks(_category);
+  // TODO: Refactor method name and param
+  const search = async (_query: string) => {
+    const images = await getArtworks(_query);
     setArtworks(images);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    search(category);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    search(query);
+  }, [query]);
 
   return {
     artworks,

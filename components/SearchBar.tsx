@@ -2,10 +2,10 @@ import { FormEvent, useState } from 'react';
 
 interface SearchBarProps {
   placeholder: string;
-  onAddCategory(value: string): void;
+  onSearch(value: string): void;
 }
 
-const SearchBar = ({ placeholder, onAddCategory }: SearchBarProps) => {
+const SearchBar = ({ placeholder, onSearch }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const SearchBar = ({ placeholder, onAddCategory }: SearchBarProps) => {
     const newInputValue = inputValue.trim();
 
     if (newInputValue.length <= 1) return;
-    onAddCategory(newInputValue);
+    onSearch(newInputValue);
 
     // FIXME: Should be empty or the text should be left
     setInputValue('');
