@@ -16,6 +16,8 @@ const useFetchArtworks = (query: string) => {
     search(query);
   }, [query]);
 
+  // TODO: Return function
+
   return {
     artworks,
     isLoading,

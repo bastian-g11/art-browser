@@ -4,6 +4,7 @@ import { ArtObject } from 'types';
 const getArtworks = async (query: string) => {
   // TODO: query to lowercase?
 
+  // TODO: Use Axios
   const url = `https://www.rijksmuseum.nl/api/en/collection?key=KHn4xrLx&imgonly=True&q=${query}`;
   const response = await fetch(url);
   const { artObjects } = await response.json();
