@@ -1,9 +1,10 @@
 import { useFetchArtworks } from 'hooks/useFetchArtworks';
 import { ArtworkItem } from 'components/ArtworkItem';
+import { Artwork } from 'types';
 
-type ArtworkGridProps = {
+interface ArtworkGridProps {
   category: string;
-};
+}
 
 const ArtworkGrid = ({ category }: ArtworkGridProps) => {
   const { artworks, isLoading } = useFetchArtworks(category);
@@ -14,7 +15,7 @@ const ArtworkGrid = ({ category }: ArtworkGridProps) => {
 
       {isLoading && <h2>Loading..</h2>}
 
-      {artworks.map(artwork => (
+      {artworks.map((artwork: Artwork) => (
         <ArtworkItem key={artwork.id} {...artwork} />
       ))}
     </>

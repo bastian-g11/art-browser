@@ -19,3 +19,20 @@ export type MockModel = {
   name: string;
   description: string;
 };
+
+export type ArtObject = {
+  id: string;
+  title: string;
+  principalOrFirstMaker: string;
+  links: { web: string };
+  webImage: { url: string };
+  hasImage: boolean;
+};
+
+export type Artwork = {
+  id: string;
+  title: string;
+  author: string;
+  site_link: string;
+  img_link: string;
+};
