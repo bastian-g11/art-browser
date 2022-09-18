@@ -3,7 +3,6 @@ import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 // import { getAuthors } from 'services/getAuthors';
 import { ArtObject } from 'types';
-import axios from 'axios';
 
 interface AuthorOption {
   id: string;
@@ -12,7 +11,7 @@ interface AuthorOption {
 
 const promiseOptions = (inputValue: string) => {
   const url = `/api/getAuthors`;
-  return axios.get(url).then(({ data }) => data);
+  return fetch(url).then(data => data.json());
 };
 
 // handle input change event
@@ -33,7 +32,6 @@ const Selector = () => {
     <AsyncSelect
       getOptionLabel={(option: AuthorOption) => option.name}
       getOptionValue={(option: AuthorOption) => option.id}
-      cacheOptions
       defaultOptions
       value={selectedValue}
       loadOptions={promiseOptions}
