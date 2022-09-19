@@ -7,10 +7,6 @@ const SearchSection = () => {
 
   const onInputSubmit = (newQuery: string): void => {
     const query = newQuery;
-    console.log(
-      '🚀 ~ file: SearchSection.tsx ~ line 10 ~ onInputSubmit ~ query',
-      query
-    );
 
     search(query);
   };

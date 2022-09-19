@@ -58,11 +58,6 @@ const ArtworkResolvers: Resolver = {
       });
       return deletedArtwork;
     },
-    // TODO
-    /**
-     * Create resolver to get which of the artworks from the
-     * API call are marked as favorites
-     */
   },
 };
 

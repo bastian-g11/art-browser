@@ -6,7 +6,7 @@ const ArtworkTypes = gql`
     api_id: String
     title: String
     author: String
-    link: String
+    img_link: String
     site_link: String
     users: [User]
   }
@@ -15,7 +15,7 @@ const ArtworkTypes = gql`
     api_id: String!
     title: String!
     author: String!
-    link: String!
+    img_link: String!
     site_link: String!
   }
 
@@ -23,7 +23,7 @@ const ArtworkTypes = gql`
     api_id: String
     title: String
     author: String
-    link: String
+    img_link: String
     site_link: String
   }
 
