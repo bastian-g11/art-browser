@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-const GET_MOCK_MODEL = gql`
-  query MockModelGetter {
+const ADD_ARTWORK_TO_USER = gql`
+  query dArtworkToUser {
     mockModelGetter {
       id
       name
