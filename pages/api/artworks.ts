@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import { ArtObject } from 'types';
+import { ArtObject, ErrorResponse } from 'types';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 
 export default async function handler(
@@ -24,8 +23,8 @@ export default async function handler(
     }));
 
     return res.status(200).json(artworks);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    const error = err as ErrorResponse;
     return res.status(error.status || 500).end(error.message);
   }
 }

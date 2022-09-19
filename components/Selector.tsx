@@ -10,7 +10,7 @@ interface AuthorOption {
 }
 
 const promiseOptions = (inputValue: string) => {
-  const url = `/api/getAuthors`;
+  const url = `/api/authors`;
   return fetch(url).then(data => data.json());
 };
 

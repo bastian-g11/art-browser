@@ -21,9 +21,6 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
 
     if (newInputValue.length <= 1) return;
     onInputSubmit(newInputValue);
-
-    // FIXME: Should be empty or the text should be left
-    setInputValue('');
   };
 
   return (
