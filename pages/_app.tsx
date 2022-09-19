@@ -3,6 +3,10 @@ import Head from 'next/head';
 import useApolloClient from 'hooks/useApolloClient';
 import { ApolloProvider } from '@apollo/client';
 import 'styles/globals.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+config.autoAddCss = false;
 
 const MyApp = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
   const { client } = useApolloClient();
