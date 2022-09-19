@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-console */
 import { useMutation } from '@apollo/client';
 import {
@@ -101,30 +102,40 @@ const ArtworkItem = ({
     }
   };
 
-  // if (loading) return <div>Loading...</div>;
-
   return (
-    <div>
-      {/* TODO: Should I use next image? */}
-      {/* images: { */}
-      {/* //   domains: ['lh3.googleusercontent.com'], */}
-      {/* // }, */}
-      {/* //   <Image src={webImage.url} alt='Artwork image' width={500} height={500} /> */}
-      {(savingAtwork || removingArtwork) && <h1>Loading...</h1>}
-      <img src={img_link} height='500' width='500' alt='Artwork' />
-      <h1>{author}</h1>
-      <p>{title}</p>
-      <a href={site_link}>Link to the Rijksmuseum site</a>
-
-      {(!savingAtwork || !removingArtwork) && (
-        <input
-          type='checkbox'
-          name='addToFavorites'
-          id='addToFavorites'
-          checked={checkedAsFavorite}
-          onChange={toggleAddToFavorites}
+    // <div className='max-w-[470px] md:max-w-sm mt-4 bg-white border border-gray-200 shadow-md '>
+    <div className='my-1 px-1 w-full md:w-1/2 lg:my-4  lg:w-1/3 bg-white border border-gray-200 shadow-md '>
+      <div className='aspect-square'>
+        <img
+          src={img_link}
+          className='object-cover h-full w-full'
+          alt='Artwork'
         />
-      )}
+      </div>
+      <div className='p-5'>
+        <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 truncate'>
+          {title}
+        </h5>
+        <p className='mb-3 font-normal text-gray-700'>{author}</p>
+        <div className='flex justify-between items-end'>
+          <a
+            href={site_link}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'
+          >
+            Go to site
+          </a>
+          <a
+            href={site_link}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300'
+          >
+            Add to Favs
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
