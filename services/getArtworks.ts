@@ -1,11 +1,12 @@
-// TODO: Error handling
 const getArtworks = async (query: string) => {
-  // TODO: query to lowercase?
+  try {
+    const response = await fetch(`/api/artworks?query=${query}`);
+    const data = await response.json();
 
-  const response = await fetch(`/api/artworks?query=${query}`);
-  const data = await response.json();
-
-  return data;
+    return data;
+  } catch (err) {
+    return err;
+  }
 };
 
 export { getArtworks };

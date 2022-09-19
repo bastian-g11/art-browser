@@ -6,7 +6,8 @@ const SearchSection = () => {
   const { artworks, isLoading, search } = useFetchArtworks();
 
   const onInputSubmit = (newQuery: string): void => {
-    search(newQuery);
+    const query = newQuery.toLowerCase();
+    search(query);
   };
 
   return (

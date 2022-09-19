@@ -6,7 +6,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // TODO: query to lowercase?
     const { query } = req.query;
 
     const response = await fetch(

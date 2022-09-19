@@ -1,20 +1,16 @@
 /* eslint-disable no-console */
 import { useState } from 'react';
 import AsyncSelect from 'react-select/async';
-// import { getAuthors } from 'services/getAuthors';
-import { ArtObject } from 'types';
+import { getAuthors } from 'services/getAuthors';
 
 interface AuthorOption {
   id: string;
   name: string;
 }
-
 const promiseOptions = (inputValue: string) => {
-  const url = `/api/authors`;
-  return fetch(url).then(data => data.json());
+  const query = inputValue.toLowerCase();
+  return getAuthors(query);
 };
-
-// handle input change event
 
 const Selector = () => {
   const [selectedValue, setSelectedValue] = useState<AuthorOption>();
