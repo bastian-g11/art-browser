@@ -103,7 +103,6 @@ const ArtworkItem = ({
   };
 
   return (
-    // <div className='max-w-[470px] md:max-w-sm mt-4 bg-white border border-gray-200 shadow-md '>
     <div className='my-1 px-1 w-full md:w-1/2 lg:my-4  lg:w-1/3 bg-white border border-gray-200 shadow-md '>
       <div className='aspect-square'>
         <img
