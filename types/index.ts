@@ -30,11 +30,12 @@ export type ArtObject = {
 };
 
 export type Artwork = {
-  id: string;
+  api_id: string;
   title: string;
   author: string;
   site_link: string;
   img_link: string;
+  isFavorite: boolean;
 };
 
 export type ErrorResponse = {

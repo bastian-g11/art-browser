@@ -27,6 +27,7 @@ const UserTypes = gql`
   type Query {
     getUser(id: String): User
     getUsers: [User]
+    getFavoriteArtworksIn(id: String, api_ids: [String]): [Artwork]
   }
 
   type Mutation {

@@ -39,6 +39,21 @@ const UserResolvers: Resolver = {
       const users = await prisma.user.findMany();
       return users;
     },
+    getFavoriteArtworksIn: async (parent, args) => {
+      const favoriteArtworks = await prisma.artwork.findMany({
+        where: {
+          api_id: {
+            in: [...args.api_ids],
+          },
+          users: {
+            some: {
+              id: args.id,
+            },
+          },
+        },
+      });
+      return favoriteArtworks;
+    },
   },
   Mutation: {
     createUser: async (parent, args) => {

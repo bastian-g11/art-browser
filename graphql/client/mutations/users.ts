@@ -1,13 +1,23 @@
 import { gql } from '@apollo/client';
 
 const ADD_ARTWORK_TO_USER = gql`
-  query dArtworkToUser {
-    mockModelGetter {
+  mutation AddArtworkToUser(
+    $addArtworkToUserId: String
+    $artwork: ArtworkInput
+  ) {
+    addArtworkToUser(id: $addArtworkToUserId, artwork: $artwork) {
       id
       name
-      description
+      artworks {
+        id
+        api_id
+        title
+        author
+        img_link
+        site_link
+      }
     }
   }
 `;
 
-export { GET_MOCK_MODEL };
+export { ADD_ARTWORK_TO_USER };
