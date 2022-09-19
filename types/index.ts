@@ -36,3 +36,8 @@ export type Artwork = {
   site_link: string;
   img_link: string;
 };
+
+export type ErrorResponse = {
+  status: number;
+  message: string;
+};

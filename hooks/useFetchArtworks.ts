@@ -1,24 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { getArtworks } from 'services/getArtworks';
 
-const useFetchArtworks = (query: string) => {
+const useFetchArtworks = () => {
   const [artworks, setArtworks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // TODO: Refactor method name and param
-  const search = async (_query: string) => {
-    const images = await getArtworks(_query);
+  // TODO: Pass in page number as args and isSearch to reset the images displayed
+  const search = async (query: string) => {
+    setIsLoading(true);
+    const images = await getArtworks(query);
+    // FIXME: With pagination do [...artworks, images]
     setArtworks(images);
     setIsLoading(false);
   };
 
-  useEffect(() => {
-    search(query);
-  }, [query]);
-
   return {
     artworks,
     isLoading,
+    search,
   };
 };
 
