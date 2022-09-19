@@ -7,9 +7,10 @@ export default async function handler(
 ) {
   try {
     const { query } = req.query;
+    console.log(query);
 
     const response = await fetch(
-      `https://www.rijksmuseum.nl/api/en/collection?key=${process.env.API_KEY}&imgonly=True&q=${query}`
+      `https://www.rijksmuseum.nl/api/en/collection?key=${process.env.API_KEY}&imgonly=True&${query}`
     );
     const { artObjects } = await response.json();
 

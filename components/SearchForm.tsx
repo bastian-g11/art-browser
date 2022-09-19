@@ -6,60 +6,76 @@ interface SearchFormProps {
 }
 
 const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
-  const [inputValue, setInputValue] = useState('');
+  const [queryValue, setQueryValue] = useState('');
 
   // FIXME: It is not that clear
   const [isByAuthor, setIsByAuthor] = useState(false);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setQueryValue(event.target.value);
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const newInputValue = inputValue.trim();
+  const onSubmit = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
 
-    if (newInputValue.length <= 1) return;
-    onInputSubmit(newInputValue);
+    let query = queryValue.trim();
+
+    if (query.length <= 1) return;
+    if (isByAuthor) {
+      query = `involvedMaker=${query}`;
+    } else {
+      query = `q=${query}`;
+    }
+    onInputSubmit(query);
+  };
+
+  const handleSearchTypeChange = () => {
+    setQueryValue('');
   };
 
   return (
-    <form action='' onSubmit={onSubmit}>
+    <form id='search-form' action='' onSubmit={onSubmit}>
       <p>Search by: </p>
-
+      {/* FIXME: Select one radio button by default */}
       <label htmlFor='searchByTitle'>
         Artwork Title
         <input
           type='radio'
           name='searchBy'
-          value='igotnone'
+          value='title'
           onClick={() => setIsByAuthor(false)}
+          onChange={handleSearchTypeChange}
         />
       </label>
-
       <label htmlFor='searchByAuthor'>
-        Artwork Title
+        Author&apos;s name
         <input
           type='radio'
           name='searchBy'
-          value='igottwo'
+          value='author'
           onClick={() => setIsByAuthor(true)}
+          onChange={handleSearchTypeChange}
         />
       </label>
-
       {!isByAuthor ? (
         <div>
           <input
             type='text'
             placeholder='By title'
-            value={inputValue}
+            value={queryValue}
             onChange={onChange}
           />
-          <button type='submit'>Buscar</button>
         </div>
       ) : (
-        <Selector />
+        <Selector
+          queryValue={queryValue}
+          setQueryValue={setQueryValue}
+          onSubmit={() => {
+            onSubmit();
+          }}
+        />
       )}
+      <button type='submit'>Buscar</button>
     </form>
   );
 };

@@ -6,7 +6,12 @@ const SearchSection = () => {
   const { artworks, isLoading, search } = useFetchArtworks();
 
   const onInputSubmit = (newQuery: string): void => {
-    const query = newQuery.toLowerCase();
+    const query = newQuery;
+    console.log(
+      '🚀 ~ file: SearchSection.tsx ~ line 10 ~ onInputSubmit ~ query',
+      query
+    );
+
     search(query);
   };
 

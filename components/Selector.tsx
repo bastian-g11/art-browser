@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { getAuthors } from 'services/getAuthors';
 
@@ -12,20 +12,27 @@ const promiseOptions = (inputValue: string) => {
   return getAuthors(query);
 };
 
-const Selector = () => {
+const Selector = ({ queryValue, setQueryValue, onSubmit }) => {
+  const [inputLocalValue, setInputLocalValue] = useState('');
   const [selectedValue, setSelectedValue] = useState<AuthorOption>();
-  const [inputValue, setValue] = useState('');
 
   const handleInputChange = (value: string) => {
-    setValue(value);
+    setInputLocalValue(value);
   };
 
-  // handle selection
-  const handleChange = value => {
+  const handleChange = (value: AuthorOption) => {
     setSelectedValue(value);
+    setQueryValue(value.id);
   };
+
+  useEffect(() => {
+    onSubmit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryValue]);
+
   return (
     <AsyncSelect
+      form='search-form'
       getOptionLabel={(option: AuthorOption) => option.name}
       getOptionValue={(option: AuthorOption) => option.id}
       defaultOptions
