@@ -13,7 +13,7 @@ export default async function handler(
     );
     const { artObjects } = await response.json();
 
-    const apiIds = [];
+    const apiIds: string[] = [];
     const artworks = artObjects.map((artwork: ArtObject) => {
       apiIds.push(artwork.id);
       return {
@@ -22,10 +22,11 @@ export default async function handler(
         author: artwork.principalOrFirstMaker,
         site_link: artwork.links.web,
         img_link: artwork.webImage.url,
+        isFavorite: false,
       };
     });
 
-    return res.status(200).json(artworks);
+    return res.status(200).json({ artworks, apiIds });
   } catch (err) {
     const error = err as ErrorResponse;
     return res.status(error.status || 500).end(error.message);
