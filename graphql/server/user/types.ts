@@ -20,7 +20,7 @@ const UserTypes = gql`
     api_id: String!
     title: String!
     author: String!
-    link: String!
+    img_link: String!
     site_link: String!
   }
 
