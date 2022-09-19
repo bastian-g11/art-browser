@@ -1,35 +1,18 @@
-import { SearchBar } from 'components/SearchBar';
-import { Selector } from 'components/Selector';
-import { useState } from 'react';
+import { SearchForm } from '@components/SearchForm';
+import { ArtworkGrid } from 'components/ArtworkGrid';
+import { useFetchArtworks } from 'hooks/useFetchArtworks';
 
-interface Props {
-  onSearch(value: string): void;
-}
+const SearchSection = () => {
+  const { artworks, isLoading, search } = useFetchArtworks();
 
-const SearchSection = ({ onSearch }: Props) => {
-  const [isByAuthor, setIsByAuthor] = useState(false);
+  const onInputSubmit = (newQuery: string): void => {
+    search(newQuery);
+  };
+
   return (
     <>
-      <p>Search by: </p>
-      <input
-        type='radio'
-        name='tab'
-        value='igotnone'
-        onClick={() => setIsByAuthor(false)}
-      />
-      Atwork Title
-      <input
-        type='radio'
-        name='tab'
-        value='igottwo'
-        onClick={() => setIsByAuthor(true)}
-      />
-      Author
-      {!isByAuthor ? (
-        <SearchBar placeholder='Search by title' onSearch={onSearch} />
-      ) : (
-        <Selector />
-      )}
+      <SearchForm onInputSubmit={onInputSubmit} />
+      {isLoading ? <h3>Loading..</h3> : <ArtworkGrid artworks={artworks} />}
     </>
   );
 };
