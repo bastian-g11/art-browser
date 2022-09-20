@@ -10,7 +10,7 @@ const useFetchArtworks = () => {
   const [isLoading, setIsLoading] = useState(false);
   const user = useUserContext();
 
-  const { data, loading, refetch } = useQuery(GET_USER_FAVORITE_ARTWORKS_IN, {
+  const { refetch } = useQuery(GET_USER_FAVORITE_ARTWORKS_IN, {
     variables: {
       getFavoriteArtworksInId: '',
       apiIds: [''],
@@ -28,6 +28,7 @@ const useFetchArtworks = () => {
       fetchedArtworks.artworks,
       fetchedArtworks.apiIds
     );
+
     // FIXME: With pagination do [...artworks, images]
     setArtworks(mappedArtworks);
     setIsLoading(false);
@@ -37,8 +38,6 @@ const useFetchArtworks = () => {
     fetchedArtworks: Artwork[],
     apiIds: string[]
   ) => {
-    console.log('FAVORITO CON EL QUE BUSCA', user.id);
-
     const {
       data: { getFavoriteArtworksIn },
     } = await refetch({ getFavoriteArtworksInId: user.id, apiIds });
@@ -49,6 +48,7 @@ const useFetchArtworks = () => {
 
     return fetchedArtworks.map((artwork: Artwork) => {
       const mappedArtwork = { ...artwork };
+
       if (favArtworksApiIds.includes(artwork.api_id)) {
         mappedArtwork.isFavorite = true;
       }

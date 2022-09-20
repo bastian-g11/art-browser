@@ -24,8 +24,8 @@ const ArtworkGrid = ({
           <ArtworkItem
             key={nanoid()}
             artwork={artwork}
-            isProfile={isProfile}
             userId={user.id}
+            isProfile={isProfile}
           />
         ))}
       </div>

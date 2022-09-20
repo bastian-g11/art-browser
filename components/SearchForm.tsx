@@ -10,8 +10,7 @@ interface SearchFormProps {
 const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
   const [queryValue, setQueryValue] = useState('');
 
-  // FIXME: It is not that clear
-  const [isByAuthor, setIsByAuthor] = useState(false);
+  const [isSearchByAuthor, setIsSearchByAuthor] = useState(false);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQueryValue(event.target.value);
@@ -23,7 +22,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
     let query = queryValue.trim();
 
     if (query.length <= 1) return;
-    if (isByAuthor) {
+    if (isSearchByAuthor) {
       query = `involvedMaker=${query}`;
     } else {
       query = `q=${query}`;
@@ -48,7 +47,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
               name='searchBy'
               value='title'
               className='w-4 h-4 ml-2 text-blue-600 bg-gray-100 border-gray-300'
-              onClick={() => setIsByAuthor(false)}
+              onClick={() => setIsSearchByAuthor(false)}
               onChange={handleSearchTypeChange}
             />
           </label>
@@ -63,14 +62,14 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
                 name='searchBy'
                 value='author'
                 className='w-4 h-4 ml-2 text-blue-600 bg-gray-100 border-gray-300'
-                onClick={() => setIsByAuthor(true)}
+                onClick={() => setIsSearchByAuthor(true)}
                 onChange={handleSearchTypeChange}
               />
             </label>
           </div>
         </div>
         <div className='flex'>
-          {!isByAuthor ? (
+          {!isSearchByAuthor ? (
             <div className='relative w-56 sm:w-96'>
               <div className='flex absolute inset-y-0  items-center pl-3 pointer-events-none'>
                 <FontAwesomeIcon className='text-gray-300' icon={faSearch} />

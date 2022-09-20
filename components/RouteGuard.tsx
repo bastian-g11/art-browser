@@ -1,28 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/router';
-
 import { useUserContext } from 'providers/UserProvider';
-// import { userService } from 'services';
 
-function RouteGuard({ children }) {
+interface RouteGuardProps {
+  children?: ReactNode;
+}
+
+function RouteGuard({ children }: RouteGuardProps) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
 
   const user = useUserContext();
-  console.log('Entraaa', user);
 
   useEffect(() => {
-    // on initial load - run auth check
     authCheck(router.asPath);
 
-    // on route change start - hide page content by setting authorized to false
     const hideContent = () => setAuthorized(false);
     router.events.on('routeChangeStart', hideContent);
 
-    // on route change complete - run auth check
     router.events.on('routeChangeComplete', authCheck);
 
-    // unsubscribe from events in useEffect return function
     return () => {
       router.events.off('routeChangeStart', hideContent);
       router.events.off('routeChangeComplete', authCheck);
@@ -31,7 +28,7 @@ function RouteGuard({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  function authCheck(url) {
+  function authCheck(url: string) {
     // redirect to login page if accessing a private page and not logged in
     const publicPaths = ['/login'];
     const path = url.split('?')[0];
@@ -42,8 +39,6 @@ function RouteGuard({ children }) {
         query: { returnUrl: router.asPath },
       });
     } else {
-      console.log('Autoriza');
-
       setAuthorized(true);
     }
   }
