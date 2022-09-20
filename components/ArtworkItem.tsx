@@ -72,21 +72,31 @@ const ArtworkItem = ({
             >
               Go to site
             </a>
-            {(!savingAtwork || !removingArtwork) && (
-              <img
-                src='/icons/bookmark.svg'
-                alt='bookmark unchecked'
-                className='h-8'
-              />
+            {(!savingAtwork || !removingArtwork) &&
+              (checkedAsFavorite ? (
+                <img
+                  src='/icons/bookmark.svg'
+                  alt='bookmark unchecked'
+                  className='h-8'
+                  onChange={toggleAddToFavorites}
+                />
+              ) : (
+                <img
+                  src='/icons/filled-bookmark.svg'
+                  alt='bookmark unchecked'
+                  className='h-8'
+                  onChange={toggleAddToFavorites}
+                />
+              ))
 
-              // <input
-              //   type='checkbox'
-              //   name='addToFavorites'
-              //   id='addToFavorites'
-              //   checked={checkedAsFavorite}
-              //   onChange={toggleAddToFavorites}
-              // />
-            )}
+            // <input
+            //   type='checkbox'
+            //   name='addToFavorites'
+            //   id='addToFavorites'
+            //   checked={checkedAsFavorite}
+            //   onChange={toggleAddToFavorites}
+            // />
+            }
           </div>
         </div>
       )}

@@ -1,7 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { FormEvent, useState } from 'react';
 import { Selector } from 'components/Selector';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface SearchFormProps {
   onInputSubmit(value: string): void;
@@ -72,7 +71,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
           {!isSearchByAuthor ? (
             <div className='relative w-56 sm:w-96'>
               <div className='flex absolute inset-y-0  items-center pl-3 pointer-events-none'>
-                <FontAwesomeIcon className='text-gray-300' icon={faSearch} />
+                <img src='/icons/search.svg' alt='search' className='h-5' />
               </div>
               <input
                 type='search'
