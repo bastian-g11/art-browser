@@ -1,4 +1,4 @@
-import { Artwork, ErrorResponse } from 'types';
+import { ErrorResponse } from 'types';
 
 interface RemoveArworkFromUserArgs {
   variables: {

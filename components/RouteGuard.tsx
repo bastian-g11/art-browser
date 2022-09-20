@@ -1,12 +1,8 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useUserContext } from 'providers/UserProvider';
 
-interface RouteGuardProps {
-  children?: ReactNode;
-}
-
-function RouteGuard({ children }: RouteGuardProps) {
+function RouteGuard({ children }: any) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 
 const userContext = React.createContext(null);
 const toggleLoginContext = React.createContext((user: object) => null);

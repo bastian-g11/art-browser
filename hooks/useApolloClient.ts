@@ -26,7 +26,7 @@ const useApolloClient = () => {
         cache,
         storage: new LocalStorageWrapper(window.localStorage),
         trigger: 'write',
-        maxSize: 1048576 * 50, // 50MB
+        maxSize: 1048576 * 50,
       });
       await newPersistor.restore();
       setPersistor(newPersistor);

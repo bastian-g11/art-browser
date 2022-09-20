@@ -6,7 +6,6 @@ const useGetProfileData = () => {
   const user = useUserContext();
   const { data, loading } = useQuery(GET_USER_DATA, {
     variables: {
-      // FIXME: Should be User ID
       getUserId: user.id,
     },
     fetchPolicy: 'cache-and-network',

@@ -30,7 +30,7 @@ const ArtworkItem = ({
   );
 
   const toggleAddToFavorites = async (
-    event: ChangeEventHandler<HTMLInputElement>
+    event: React.FormEvent<HTMLInputElement>
   ) => {
     const maskedAsFavorite = event.target.checked;
 
