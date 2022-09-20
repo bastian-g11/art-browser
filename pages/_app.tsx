@@ -5,6 +5,8 @@ import { ApolloProvider } from '@apollo/client';
 import 'styles/globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
+import { UserProvider } from 'providers/UserProvider';
+import { RouteGuard } from 'components';
 
 config.autoAddCss = false;
 
@@ -18,7 +20,11 @@ const MyApp = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <ApolloProvider client={client}>
-        <Component {...pageProps} />
+        <UserProvider>
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
+        </UserProvider>
       </ApolloProvider>
     </>
   );
