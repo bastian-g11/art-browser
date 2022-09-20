@@ -14,6 +14,7 @@ const SearchSection = () => {
   return (
     <>
       <SearchForm onInputSubmit={onInputSubmit} />
+      {/* FIXME: Add react loading */}
       {isLoading ? <h3>Loading..</h3> : <ArtworkGrid artworks={artworks} />}
     </>
   );

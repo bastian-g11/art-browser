@@ -71,7 +71,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
         </div>
         <div className='flex'>
           {!isByAuthor ? (
-            <div className='relative sm:w-96'>
+            <div className='relative w-56 sm:w-96'>
               <div className='flex absolute inset-y-0  items-center pl-3 pointer-events-none'>
                 <FontAwesomeIcon className='text-gray-300' icon={faSearch} />
               </div>
@@ -86,7 +86,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
               />
             </div>
           ) : (
-            <div className='relative sm:w-96'>
+            <div className='relative w-56 sm:w-96'>
               <Selector
                 queryValue={queryValue}
                 setQueryValue={setQueryValue}

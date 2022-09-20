@@ -21,7 +21,7 @@ const AccountTypes = gql`
   }
 
   type Query {
-    getAccount(id: String): Account
+    getAccount(email: String): Account
     getAccounts: [Account]
   }
 
