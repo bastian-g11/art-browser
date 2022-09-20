@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 
 const userContext = React.createContext(null);
-const toggleLoginContext = React.createContext((user: object) => null);
+const toggleLoginContext = React.createContext(
+  ({ userLogin, userLogout }: { userLogin: (userData: UserContext) => void }) =>
+    null
+);
 
 const useUserContext = () => useContext(userContext);
 const useToggleLoginContext = () => useContext(toggleLoginContext);
@@ -19,7 +22,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserContext | null>();
 
   const userLogin = (userData: UserContext): void => {
-    console.log('Login');
     if (user) {
       setUser(null);
     } else {
