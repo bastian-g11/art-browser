@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react';
 
 const userContext = React.createContext(null);
-const toggleLoginContext = React.createContext(() => null);
+const toggleLoginContext = React.createContext((user: object) => null);
 
 const useUserContext = () => useContext(userContext);
 const useToggleLoginContext = () => useContext(toggleLoginContext);
@@ -19,14 +19,15 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserContext | null>();
 
   const toggleLogin = useCallback(
-    ({ id, email, name }: UserContext) => {
+    (userData: UserContext): void => {
+      console.log('Entra');
       if (user) {
         setUser(null);
       } else {
         setUser({
-          id,
-          email,
-          name,
+          id: userData?.id,
+          email: userData?.email,
+          name: userData?.name,
         });
       }
     },

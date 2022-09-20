@@ -1,12 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { NextPage } from 'next/types';
 import { useUserContext, useToggleLoginContext } from 'providers/UserProvider';
 import Image from 'next/image';
-
-const onSubmit = (event?: FormEvent<HTMLFormElement>) => {
-  event?.preventDefault();
-};
+import { useLogin } from 'hooks/useLogin';
 
 // {/* <div className='relative h-screen translate-x-1/2'>
 //   <Image
@@ -17,8 +14,27 @@ const onSubmit = (event?: FormEvent<HTMLFormElement>) => {
 //   />
 // </div> */}
 const Login: NextPage = () => {
-  const user = useUserContext();
-  const toggleLogin = useToggleLoginContext();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { login } = useLogin();
+
+  const onSubmit = (event?: FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    login({
+      email: formData.email,
+      password: formData.password,
+    });
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const uset = useUserContext();
+  console.log(uset);
 
   return (
     <div className='container flex justify-center items-center w-screen h-screen '>
@@ -36,8 +52,11 @@ const Login: NextPage = () => {
               <input
                 className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                 id='email'
+                name='email'
                 type='text'
                 placeholder='Email'
+                value={formData.email}
+                onChange={onChange}
               />
             </label>
           </div>
@@ -51,7 +70,10 @@ const Login: NextPage = () => {
                 className='shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
                 id='password'
                 type='password'
+                name='password'
                 placeholder='******************'
+                value={formData.password}
+                onChange={onChange}
               />
             </label>
             <p className='text-red-500 text-xs italic'>
@@ -61,7 +83,7 @@ const Login: NextPage = () => {
           <div className='flex justify-center'>
             <button
               className='bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-              type='button'
+              type='submit'
             >
               Sign In
             </button>
