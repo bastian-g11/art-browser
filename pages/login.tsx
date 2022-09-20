@@ -4,7 +4,6 @@ import { NextPage } from 'next/types';
 import Image from 'next/image';
 import { useLogin } from 'hooks/useLogin';
 import Head from 'next/head';
-import { useUserContext } from 'providers/UserProvider';
 
 // {/* <div className='relative h-screen translate-x-1/2'>
 //   <Image
@@ -34,8 +33,6 @@ const Login: NextPage = () => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-  const uset = useUserContext();
-  console.log(uset);
 
   return (
     <>

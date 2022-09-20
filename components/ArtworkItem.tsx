@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useMutation } from '@apollo/client';
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   ADD_ARTWORK_TO_USER,
   REMOVE_ARTWORK_FROM_USER,
@@ -68,6 +68,7 @@ const ArtworkItem = ({
               Go to site
             </a>
             {(!savingAtwork || !removingArtwork) && (
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
               <div
                 onClick={toggleAddToFavorites}
                 className='hover:cursor-pointer'
