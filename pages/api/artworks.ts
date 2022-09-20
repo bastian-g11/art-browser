@@ -17,11 +17,11 @@ export default async function handler(
     const artworks = artObjects.map((artwork: ArtObject) => {
       apiIds.push(artwork.id);
       return {
-        api_id: artwork.id,
+        apiId: artwork.id,
         title: artwork.title,
         author: artwork.principalOrFirstMaker,
-        site_link: artwork.links.web,
-        img_link: artwork.webImage.url,
+        siteLink: artwork.links.web,
+        imgLink: artwork.webImage.url,
         isFavorite: false,
       };
     });

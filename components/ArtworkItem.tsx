@@ -1,47 +1,45 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-console */
 import { useMutation } from '@apollo/client';
 import {
   ADD_ARTWORK_TO_USER,
   REMOVE_ARTWORK_FROM_USER,
 } from '@graphql/client/mutations/users';
 import { useState } from 'react';
-import { Artwork, ErrorResponse } from 'types';
-// import Image from 'next/image';
+import { Artwork } from 'types';
+import { addToFavorites } from 'helpers/addToFavorites';
 
-const addArtworkToFavorites = async (
-  addArtworkToUser,
-  { userId, api_id, title, author, site_link, img_link }
-) => {
-  try {
-    await addArtworkToUser({
-      // FIXME: User ID should be the one that is logged in
-      variables: {
-        addArtworkToUserId: userId,
-        artwork: {
-          api_id,
-          title,
-          author,
-          site_link,
-          img_link,
-        },
-      },
-      // FIXME: If I add refetchQueries a warning is shown
-      // refetchQueries: [ADD_ARTWORK_TO_USER],
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const addArtworkToFavorites = async (
+//   addArtworkToUser,
+//   { userId, api_id, title, author, site_link, img_link }
+// ) => {
+//   try {
+//     await addArtworkToUser({
+//       // FIXME: User ID should be the one that is logged in
+//       variables: {
+//         addArtworkToUserId: userId,
+//         artwork: {
+//           api_id,
+//           title,
+//           author,
+//           site_link,
+//           img_link,
+//         },
+//       },
+//       // FIXME: If I add refetchQueries a warning is shown
+//       // refetchQueries: [ADD_ARTWORK_TO_USER],
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 const removeArtworkFromFavorites = async (
   removeArtworkFromUser,
   {
     user_id,
-    api_id,
+    apiId,
   }: {
     user_id: string;
-    api_id: string;
+    apiId: string;
   }
 ) => {
   try {
@@ -49,7 +47,7 @@ const removeArtworkFromFavorites = async (
       // FIXME: User ID should be the one that is logged in
       variables: {
         removeArtworkFromUserId: user_id,
-        artworkId: api_id,
+        artworkId: apiId,
       },
       // FIXME: If I add refetchQueries a warning is shown
       // refetchQueries: [REMOVE_ARTWORK_FROM_USER],
@@ -61,21 +59,17 @@ const removeArtworkFromFavorites = async (
 
 const ArtworkItem = ({
   artwork,
-  isProfile = false,
   userId,
+  isProfile = false,
 }: {
   artwork: Artwork;
-  isProfile: boolean;
   userId: string;
+  isProfile: boolean;
 }) => {
-  const {
-    api_id: apiId,
-    title,
-    author,
-    site_link: siteLink,
-    img_link: imgLink,
-    isFavorite,
-  } = artwork;
+  const { apiId, title, author, siteLink, imgLink, isFavorite } = artwork;
+  // console.log(imgLink);
+
+  const [checkedAsFavorite, setCheckedAsFavorite] = useState(isFavorite);
 
   const [addArtworkToUser, { loading: savingAtwork }] = useMutation(
     ADD_ARTWORK_TO_USER
@@ -83,7 +77,6 @@ const ArtworkItem = ({
   const [removeArtworkFromUser, { loading: removingArtwork }] = useMutation(
     REMOVE_ARTWORK_FROM_USER
   );
-  const [checkedAsFavorite, setCheckedAsFavorite] = useState(isFavorite);
 
   const toggleAddToFavorites = async event => {
     console.log('Add to favorite', event.target.checked);
@@ -94,21 +87,17 @@ const ArtworkItem = ({
     if (maskedAsFavorite) {
       console.log('Save');
 
-      addArtworkToFavorites(addArtworkToUser, {
+      addToFavorites({
         userId,
-        api_id: apiId,
-        title,
-        author,
-        site_link: siteLink,
-        img_link: imgLink,
-        isFavorite,
+        addArtworkToUser,
+        artwork,
       });
     } else {
       console.log('Delete');
       // FIXME: UserID should be pass dynamically
       removeArtworkFromFavorites(removeArtworkFromUser, {
         user_id: userId,
-        api_id: apiId,
+        apiId,
       });
     }
   };
