@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useMutation } from '@apollo/client';
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 import {
   ADD_ARTWORK_TO_USER,
   REMOVE_ARTWORK_FROM_USER,
 } from '@graphql/client/mutations/users';
 import { Artwork } from 'types';
 import { addToFavorites, removeFromFavorites } from 'helpers';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 const ArtworkItem = ({
   artwork,
@@ -31,13 +29,8 @@ const ArtworkItem = ({
     REMOVE_ARTWORK_FROM_USER
   );
 
-  const toggleAddToFavorites = async (
-    event: ChangeEventHandler<HTMLInputElement>
-  ) => {
-    const maskedAsFavorite = event.target.checked;
-
-    setCheckedAsFavorite(maskedAsFavorite);
-    if (maskedAsFavorite) {
+  const toggleAddToFavorites = () => {
+    if (!checkedAsFavorite) {
       addToFavorites({
         userId,
         addArtworkToUser,
@@ -46,6 +39,8 @@ const ArtworkItem = ({
     } else {
       removeFromFavorites({ userId, api_id, removeArtworkFromUser });
     }
+
+    setCheckedAsFavorite(!checkedAsFavorite);
   };
 
   return (
@@ -72,22 +67,26 @@ const ArtworkItem = ({
             >
               Go to site
             </a>
-            {(!savingAtwork || !removingArtwork) &&
-              (checkedAsFavorite ? (
-                <img
-                  src='/icons/bookmark.svg'
-                  alt='bookmark unchecked'
-                  className='h-8'
-                  onChange={toggleAddToFavorites}
-                />
-              ) : (
-                <img
-                  src='/icons/filled-bookmark.svg'
-                  alt='bookmark unchecked'
-                  className='h-8'
-                  onChange={toggleAddToFavorites}
-                />
-              ))
+            {(!savingAtwork || !removingArtwork) && (
+              <div
+                onClick={toggleAddToFavorites}
+                className='hover:cursor-pointer'
+              >
+                {checkedAsFavorite ? (
+                  <img
+                    src='/icons/filled-bookmark.svg'
+                    alt='bookmark checked'
+                    className='h-8'
+                  />
+                ) : (
+                  <img
+                    src='/icons/bookmark.svg'
+                    alt='bookmark unchecked'
+                    className='h-8'
+                  />
+                )}
+              </div>
+            )
 
             // <input
             //   type='checkbox'
