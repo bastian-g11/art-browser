@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { getArtworks } from 'services/getArtworks';
+import { useUserContext } from 'providers/UserProvider';
 import { GET_USER_FAVORITE_ARTWORKS_IN } from '@graphql/client/queries/users';
 import { Artwork } from 'types';
 
 const useFetchArtworks = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const user = useUserContext();
 
   const { data, loading, refetch } = useQuery(GET_USER_FAVORITE_ARTWORKS_IN, {
     variables: {
-      // FIXME: Should be User ID
-      getFavoriteArtworksInId: 'cl868tylr0076r8u68ql0q7zg',
+      getFavoriteArtworksInId: '',
       apiIds: [''],
     },
     skip: true,
@@ -36,9 +37,11 @@ const useFetchArtworks = () => {
     fetchedArtworks: Artwork[],
     apiIds: string[]
   ) => {
+    console.log('FAVORITO CON EL QUE BUSCA', user.id);
+
     const {
       data: { getFavoriteArtworksIn },
-    } = await refetch({ apiIds });
+    } = await refetch({ getFavoriteArtworksInId: user.id, apiIds });
 
     const favArtworksApiIds = getFavoriteArtworksIn.map(
       (artwork: Artwork) => artwork.api_id

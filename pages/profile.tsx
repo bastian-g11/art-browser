@@ -3,7 +3,8 @@ import { useGetProfileData } from 'hooks/useGetProfileData';
 import { NextPage } from 'next/types';
 
 const Profile: NextPage = () => {
-  const { user, isLoading } = useGetProfileData();
+  const { user, artworks, isLoading } = useGetProfileData();
+  console.log('🚀 ~ file: profile.tsx ~ line 7 ~ isLoading', isLoading);
 
   // FIXME: Add react loading
   if (isLoading) {
@@ -14,16 +15,16 @@ const Profile: NextPage = () => {
     <>
       <Navbar />
       {/* FIXME: Should be taken from the context */}
-      {/* <div className='container  mx-auto px-4 md:px-12 my-0'> */}
-      {/* <h2 className='text-2xl font-semibold'>{user.getUser.name}</h2> */}
-      {/* <p>{user.getUser.accounts[0]?.email}</p> */}
-      {/* <p className='font-semibold mt-4'>Favorite Artworks</p>
-      </div> */}
-      {/* {isLoading ? (
+      <div className='container  mx-auto px-4 md:px-12 my-4'>
+        <h2 className='text-2xl font-semibold'>{user?.name}</h2>
+        <p>{user?.email}</p>
+        <p className='font-semibold mt-4'>Favorite Artworks</p>
+      </div>
+      {isLoading ? (
         <h3>Loading..</h3>
       ) : (
-        <ArtworkGrid artworks={user.getUser.artworks} isProfile />
-      )} */}
+        <ArtworkGrid artworks={artworks} isProfile />
+      )}
     </>
   );
 };

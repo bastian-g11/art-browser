@@ -49,8 +49,6 @@ const UserResolvers: Resolver = {
       return users;
     },
     getFavoriteArtworksIn: async (parent, args) => {
-      console.log('Entra');
-
       const favoriteArtworks = await prisma.artwork.findMany({
         where: {
           api_id: {

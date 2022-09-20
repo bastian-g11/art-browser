@@ -11,13 +11,13 @@ import { Artwork, ErrorResponse } from 'types';
 
 const addArtworkToFavorites = async (
   addArtworkToUser,
-  { api_id, title, author, site_link, img_link }: Artwork
+  { userId, api_id, title, author, site_link, img_link }
 ) => {
   try {
     await addArtworkToUser({
       // FIXME: User ID should be the one that is logged in
       variables: {
-        addArtworkToUserId: 'cl868tylr0076r8u68ql0q7zg',
+        addArtworkToUserId: userId,
         artwork: {
           api_id,
           title,
@@ -62,9 +62,11 @@ const removeArtworkFromFavorites = async (
 const ArtworkItem = ({
   artwork,
   isProfile = false,
+  userId,
 }: {
   artwork: Artwork;
   isProfile: boolean;
+  userId: string;
 }) => {
   const {
     api_id: apiId,
@@ -93,6 +95,7 @@ const ArtworkItem = ({
       console.log('Save');
 
       addArtworkToFavorites(addArtworkToUser, {
+        userId,
         api_id: apiId,
         title,
         author,
@@ -104,7 +107,7 @@ const ArtworkItem = ({
       console.log('Delete');
       // FIXME: UserID should be pass dynamically
       removeArtworkFromFavorites(removeArtworkFromUser, {
-        user_id: 'cl868tylr0076r8u68ql0q7zg',
+        user_id: userId,
         api_id: apiId,
       });
     }
