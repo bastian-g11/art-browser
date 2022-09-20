@@ -21,17 +21,17 @@ const addToFavorites = async ({
   artwork,
 }: AddToFavoritesProps) => {
   try {
-    const { apiId, title, author, siteLink, imgLink } = artwork;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { api_id, title, author, site_link, img_link } = artwork;
     await addArtworkToUser({
       variables: {
         addArtworkToUserId: userId,
         artwork: {
-          apiId,
+          api_id,
           title,
           author,
-          siteLink,
-          imgLink,
-          isFavorite: false,
+          site_link,
+          img_link,
         },
       },
     });

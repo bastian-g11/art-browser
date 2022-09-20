@@ -4,6 +4,7 @@ import { NextPage } from 'next/types';
 
 const Profile: NextPage = () => {
   const { user, artworks, isLoading } = useGetProfileData();
+  console.log('🚀 ~ file: profile.tsx ~ line 7 ~ artworks', artworks);
   console.log('🚀 ~ file: profile.tsx ~ line 7 ~ isLoading', isLoading);
 
   // FIXME: Add react loading

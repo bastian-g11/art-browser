@@ -36,18 +36,17 @@ const removeArtworkFromFavorites = async (
   removeArtworkFromUser,
   {
     user_id,
-    apiId,
+    api_id,
   }: {
     user_id: string;
-    apiId: string;
+    api_id: string;
   }
 ) => {
   try {
     await removeArtworkFromUser({
-      // FIXME: User ID should be the one that is logged in
       variables: {
         removeArtworkFromUserId: user_id,
-        artworkId: apiId,
+        artworkId: api_id,
       },
       // FIXME: If I add refetchQueries a warning is shown
       // refetchQueries: [REMOVE_ARTWORK_FROM_USER],
@@ -63,11 +62,10 @@ const ArtworkItem = ({
   isProfile = false,
 }: {
   artwork: Artwork;
-  userId: string;
   isProfile: boolean;
+  userId: string;
 }) => {
-  const { apiId, title, author, siteLink, imgLink, isFavorite } = artwork;
-  // console.log(imgLink);
+  const { api_id, title, author, site_link, img_link, isFavorite } = artwork;
 
   const [checkedAsFavorite, setCheckedAsFavorite] = useState(isFavorite);
 
@@ -97,7 +95,7 @@ const ArtworkItem = ({
       // FIXME: UserID should be pass dynamically
       removeArtworkFromFavorites(removeArtworkFromUser, {
         user_id: userId,
-        apiId,
+        api_id,
       });
     }
   };
@@ -106,7 +104,7 @@ const ArtworkItem = ({
     <div className='my-1 px-1 w-full md:w-1/2 lg:my-4 lg:w-1/3 bg-white border border-gray-200 shadow-md '>
       <div className='aspect-square'>
         <img
-          src={imgLink}
+          src={img_link}
           className='object-cover h-full w-full'
           alt='Artwork'
         />
@@ -119,7 +117,7 @@ const ArtworkItem = ({
           <p className='mb-3 font-normal text-gray-700'>{author}</p>
           <div className='flex justify-between items-end'>
             <a
-              href={siteLink}
+              href={site_link}
               target='_blank'
               rel='noopener noreferrer'
               className='inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300'

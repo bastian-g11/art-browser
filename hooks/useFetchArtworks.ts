@@ -43,13 +43,13 @@ const useFetchArtworks = () => {
     } = await refetch({ getFavoriteArtworksInId: user.id, apiIds });
 
     const favArtworksApiIds = getFavoriteArtworksIn.map(
-      ({ api_id }: { api_id: string }) => api_id
+      (artwork: Artwork) => artwork.api_id
     );
 
     return fetchedArtworks.map((artwork: Artwork) => {
       const mappedArtwork = { ...artwork };
 
-      if (favArtworksApiIds.includes(artwork.apiId)) {
+      if (favArtworksApiIds.includes(artwork.api_id)) {
         mappedArtwork.isFavorite = true;
       }
 

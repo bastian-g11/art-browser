@@ -30,11 +30,11 @@ export type ArtObject = {
 };
 
 export type Artwork = {
-  apiId: string;
+  api_id: string;
   title: string;
   author: string;
-  siteLink: string;
-  imgLink: string;
+  site_link: string;
+  img_link: string;
   isFavorite: boolean;
 };
 
