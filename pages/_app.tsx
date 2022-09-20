@@ -6,6 +6,7 @@ import 'styles/globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { UserProvider } from 'providers/UserProvider';
+import { RouteGuard } from 'components';
 
 config.autoAddCss = false;
 
@@ -20,7 +21,9 @@ const MyApp = ({ Component, pageProps: { ...pageProps } }: AppProps) => {
       </Head>
       <ApolloProvider client={client}>
         <UserProvider>
-          <Component {...pageProps} />
+          <RouteGuard>
+            <Component {...pageProps} />
+          </RouteGuard>
         </UserProvider>
       </ApolloProvider>
     </>

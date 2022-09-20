@@ -28,6 +28,8 @@ const useLogin = () => {
 
     if (userData) {
       userLogin({ id: userData.id, name: userData.name, email });
+      const returnUrl = router.query.returnUrl || '/';
+      router.push(returnUrl);
       router.push('/artworks');
     }
   };

@@ -37,22 +37,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  // const toggleLogin = useCallback(
-  //   (userData: UserContext): void => {
-  //     console.log('Entra');
-  //     if (user) {
-  //       setUser(null);
-  //     } else {
-  //       setUser({
-  //         id: userData?.id,
-  //         email: userData?.email,
-  //         name: userData?.name,
-  //       });
-  //     }
-  //   },
-  //   [user]
-  // );
-
   return (
     <userContext.Provider value={user}>
       <toggleLoginContext.Provider value={{ userLogin, userLogout }}>

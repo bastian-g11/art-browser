@@ -3,11 +3,6 @@ import { gql } from '@apollo/client';
 const GET_USER_DATA = gql`
   query GetUser($getUserId: String) {
     getUser(id: $getUserId) {
-      id
-      name
-      accounts {
-        email
-      }
       artworks {
         api_id
         id
