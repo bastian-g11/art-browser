@@ -1,46 +1,37 @@
-// import { Artwork, ErrorResponse } from 'types';
+import { Artwork, ErrorResponse } from 'types';
 
-// interface AddArworkToUserArgs {
-//   variables: {
-//     addArtworkToUserId: string;
-//     artwork: Artwork;
-//   };
-// }
+interface RemoveArworkFromUserArgs {
+  variables: {
+    removeArtworkFromUserId: string;
+    artworkId: string;
+  };
+}
 
-// interface AddToFavoritesProps {
-//   userId: string;
-//   addArtworkToUser: ({
-//     variables: { addArtworkToUserId, artwork },
-//   }: AddArworkToUserArgs) => void;
-//   artwork: Artwork;
-// }
+interface RemoveFromFavoritesProps {
+  userId: string;
+  api_id: string;
+  removeArtworkFromUser: ({
+    variables: { removeArtworkFromUserId, artworkId },
+  }: RemoveArworkFromUserArgs) => void;
+}
 
-// const addToFavorites = async ({
-//   userId,
-//   addArtworkToUser,
-//   artwork,
-// }: AddToFavoritesProps) => {
-//   try {
-//     // eslint-disable-next-line @typescript-eslint/naming-convention
-//     const { apiId, title, author, site_link, img_link } = artwork;
-//     await addArtworkToUser({
-//       variables: {
-//         addArtworkToUserId: userId,
-//         artwork: {
-//           apiId,
-//           title,
-//           author,
-//           site_link,
-//           img_link,
-//           isFavorite: false,
-//         },
-//       },
-//     });
-//     return null;
-//   } catch (err) {
-//     const error = err as ErrorResponse;
-//     return error;
-//   }
-// };
+const removeFromFavorites = async ({
+  userId,
+  api_id,
+  removeArtworkFromUser,
+}: RemoveFromFavoritesProps) => {
+  try {
+    await removeArtworkFromUser({
+      variables: {
+        removeArtworkFromUserId: userId,
+        artworkId: api_id,
+      },
+    });
+    return null;
+  } catch (err) {
+    const error = err as ErrorResponse;
+    return error;
+  }
+};
 
-// export { addToFavorites };
+export { removeFromFavorites };

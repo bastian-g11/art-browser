@@ -1,60 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 import { useMutation } from '@apollo/client';
+import { ChangeEventHandler, useState } from 'react';
 import {
   ADD_ARTWORK_TO_USER,
   REMOVE_ARTWORK_FROM_USER,
 } from '@graphql/client/mutations/users';
-import { useState } from 'react';
 import { Artwork } from 'types';
-import { addToFavorites } from 'helpers/addToFavorites';
-
-// const addArtworkToFavorites = async (
-//   addArtworkToUser,
-//   { userId, api_id, title, author, site_link, img_link }
-// ) => {
-//   try {
-//     await addArtworkToUser({
-//       // FIXME: User ID should be the one that is logged in
-//       variables: {
-//         addArtworkToUserId: userId,
-//         artwork: {
-//           api_id,
-//           title,
-//           author,
-//           site_link,
-//           img_link,
-//         },
-//       },
-//       // FIXME: If I add refetchQueries a warning is shown
-//       // refetchQueries: [ADD_ARTWORK_TO_USER],
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-const removeArtworkFromFavorites = async (
-  removeArtworkFromUser,
-  {
-    user_id,
-    api_id,
-  }: {
-    user_id: string;
-    api_id: string;
-  }
-) => {
-  try {
-    await removeArtworkFromUser({
-      variables: {
-        removeArtworkFromUserId: user_id,
-        artworkId: api_id,
-      },
-      // FIXME: If I add refetchQueries a warning is shown
-      // refetchQueries: [REMOVE_ARTWORK_FROM_USER],
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+import { addToFavorites, removeFromFavorites } from 'helpers';
 
 const ArtworkItem = ({
   artwork,
@@ -65,6 +17,7 @@ const ArtworkItem = ({
   isProfile: boolean;
   userId: string;
 }) => {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { api_id, title, author, site_link, img_link, isFavorite } = artwork;
 
   const [checkedAsFavorite, setCheckedAsFavorite] = useState(isFavorite);
@@ -76,27 +29,20 @@ const ArtworkItem = ({
     REMOVE_ARTWORK_FROM_USER
   );
 
-  const toggleAddToFavorites = async event => {
-    console.log('Add to favorite', event.target.checked);
-
+  const toggleAddToFavorites = async (
+    event: ChangeEventHandler<HTMLInputElement>
+  ) => {
     const maskedAsFavorite = event.target.checked;
 
     setCheckedAsFavorite(maskedAsFavorite);
     if (maskedAsFavorite) {
-      console.log('Save');
-
       addToFavorites({
         userId,
         addArtworkToUser,
         artwork,
       });
     } else {
-      console.log('Delete');
-      // FIXME: UserID should be pass dynamically
-      removeArtworkFromFavorites(removeArtworkFromUser, {
-        user_id: userId,
-        api_id,
-      });
+      removeFromFavorites({ userId, api_id, removeArtworkFromUser });
     }
   };
 
