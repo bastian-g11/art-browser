@@ -3,15 +3,21 @@ import { ArtworkItem } from 'components/ArtworkItem';
 import { Artwork } from 'types';
 import { nanoid } from 'nanoid';
 
-const ArtworkGrid = ({ artworks }: { artworks: Artwork[] }) => (
-  <div className='container my-12 mx-auto px-4 md:px-12'>
+const ArtworkGrid = ({
+  artworks,
+  isProfile,
+}: {
+  artworks: Artwork[];
+  isProfile: true;
+}) => (
+  <div className='container mb-12 mx-auto px-4 md:px-12'>
     <div className='flex flex-wrap -mx-1 lg:-mx-4'>
       {/* TODO: Don't display text if not search is done */}
       {artworks.length === 0 && (
-        <h1 className=' m-auto text-gray-500'>Not images found? Try again</h1>
+        <p className=' m-auto text-gray-500'>Not images found? Try again</p>
       )}
       {artworks.map((artwork: Artwork) => (
-        <ArtworkItem key={nanoid()} {...artwork} />
+        <ArtworkItem key={nanoid()} artwork={artwork} isProfile={isProfile} />
       ))}
     </div>
   </div>

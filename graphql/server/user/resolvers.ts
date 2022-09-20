@@ -1,6 +1,14 @@
 import prisma from '@config/prisma';
 import { Resolver } from 'types';
 
+// FIXME: Abstract to a different file
+const accountReturnedFields = {
+  id: true,
+  email: true,
+  user: true,
+  user_id: true,
+};
+
 const UserResolvers: Resolver = {
   User: {
     artworks: async (parent, args) => {
@@ -22,6 +30,7 @@ const UserResolvers: Resolver = {
             equals: parent.id,
           },
         },
+        select: accountReturnedFields,
       });
       return accounts;
     },
