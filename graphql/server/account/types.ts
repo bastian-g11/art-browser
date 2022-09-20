@@ -23,6 +23,7 @@ const AccountTypes = gql`
   type Query {
     getAccount(email: String): Account
     getAccounts: [Account]
+    login(email: String, password: String): User
   }
 
   type Mutation {

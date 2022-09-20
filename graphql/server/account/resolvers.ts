@@ -38,6 +38,25 @@ const AccountResolvers: Resolver = {
 
       return accounts;
     },
+
+    login: async (parent, args) => {
+      const account = await prisma.account.findUnique({
+        where: {
+          email: args.email,
+        },
+      });
+
+      if (args.password === account?.password) {
+        const user = await prisma.user.findUnique({
+          where: {
+            id: account?.user_id,
+          },
+        });
+        return user;
+      }
+
+      return null;
+    },
   },
   Mutation: {
     createAccount: async (parent, args) => {
