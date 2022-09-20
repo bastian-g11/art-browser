@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useMutation } from '@apollo/client';
-import { ChangeEventHandler, useState } from 'react';
+import { useState } from 'react';
 import {
   ADD_ARTWORK_TO_USER,
   REMOVE_ARTWORK_FROM_USER,
@@ -29,13 +29,8 @@ const ArtworkItem = ({
     REMOVE_ARTWORK_FROM_USER
   );
 
-  const toggleAddToFavorites = async (
-    event: React.FormEvent<HTMLInputElement>
-  ) => {
-    const maskedAsFavorite = event.target.checked;
-
-    setCheckedAsFavorite(maskedAsFavorite);
-    if (maskedAsFavorite) {
+  const toggleAddToFavorites = () => {
+    if (!checkedAsFavorite) {
       addToFavorites({
         userId,
         addArtworkToUser,
@@ -44,6 +39,8 @@ const ArtworkItem = ({
     } else {
       removeFromFavorites({ userId, api_id, removeArtworkFromUser });
     }
+
+    setCheckedAsFavorite(!checkedAsFavorite);
   };
 
   return (
@@ -71,14 +68,35 @@ const ArtworkItem = ({
               Go to site
             </a>
             {(!savingAtwork || !removingArtwork) && (
-              <input
-                type='checkbox'
-                name='addToFavorites'
-                id='addToFavorites'
-                checked={checkedAsFavorite}
-                onChange={toggleAddToFavorites}
-              />
-            )}
+              // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+              <div
+                onClick={toggleAddToFavorites}
+                className='hover:cursor-pointer'
+              >
+                {checkedAsFavorite ? (
+                  <img
+                    src='/icons/filled-bookmark.svg'
+                    alt='bookmark checked'
+                    className='h-8'
+                  />
+                ) : (
+                  <img
+                    src='/icons/bookmark.svg'
+                    alt='bookmark unchecked'
+                    className='h-8'
+                  />
+                )}
+              </div>
+            )
+
+            // <input
+            //   type='checkbox'
+            //   name='addToFavorites'
+            //   id='addToFavorites'
+            //   checked={checkedAsFavorite}
+            //   onChange={toggleAddToFavorites}
+            // />
+            }
           </div>
         </div>
       )}

@@ -6,14 +6,14 @@ const useGetProfileData = () => {
   const user = useUserContext();
   const { data, loading } = useQuery(GET_USER_DATA, {
     variables: {
-      getUserId: user.id,
+      getUserId: user?.id,
     },
     fetchPolicy: 'cache-and-network',
   });
 
   return {
     user,
-    artworks: data.getUser.artworks,
+    artworks: data?.getUser?.artworks,
     isLoading: loading,
   };
 };

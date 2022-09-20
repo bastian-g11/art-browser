@@ -4,8 +4,6 @@ import { NextPage } from 'next/types';
 
 const Profile: NextPage = () => {
   const { user, artworks, isLoading } = useGetProfileData();
-  console.log('🚀 ~ file: profile.tsx ~ line 7 ~ artworks', artworks);
-  console.log('🚀 ~ file: profile.tsx ~ line 7 ~ isLoading', isLoading);
 
   // FIXME: Add react loading
   if (isLoading) {
@@ -17,7 +15,7 @@ const Profile: NextPage = () => {
       <Navbar />
       {/* FIXME: Should be taken from the context */}
       <div className='container  mx-auto px-4 md:px-12 my-4'>
-        <h2 className='text-2xl font-semibold'>{user?.name}</h2>
+        <h2 className='text-4xl font-semibold'>{user?.name}</h2>
         <p>{user?.email}</p>
         <p className='font-semibold mt-4'>Favorite Artworks</p>
       </div>
