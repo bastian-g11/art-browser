@@ -7,6 +7,8 @@ import {
 } from '@graphql/client/mutations/users';
 import { Artwork } from 'types';
 import { addToFavorites, removeFromFavorites } from 'helpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 const ArtworkItem = ({
   artwork,
@@ -30,7 +32,7 @@ const ArtworkItem = ({
   );
 
   const toggleAddToFavorites = async (
-    event: React.FormEvent<HTMLInputElement>
+    event: ChangeEventHandler<HTMLInputElement>
   ) => {
     const maskedAsFavorite = event.target.checked;
 
@@ -71,13 +73,19 @@ const ArtworkItem = ({
               Go to site
             </a>
             {(!savingAtwork || !removingArtwork) && (
-              <input
-                type='checkbox'
-                name='addToFavorites'
-                id='addToFavorites'
-                checked={checkedAsFavorite}
-                onChange={toggleAddToFavorites}
+              <img
+                src='/icons/bookmark.svg'
+                alt='bookmark unchecked'
+                className='h-8'
               />
+
+              // <input
+              //   type='checkbox'
+              //   name='addToFavorites'
+              //   id='addToFavorites'
+              //   checked={checkedAsFavorite}
+              //   onChange={toggleAddToFavorites}
+              // />
             )}
           </div>
         </div>
