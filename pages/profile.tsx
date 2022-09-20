@@ -1,10 +1,12 @@
 import { Navbar, ArtworkGrid } from 'components';
 import { useGetProfileData } from 'hooks/useGetProfileData';
 import { NextPage } from 'next/types';
+import { useUserContext } from 'providers/UserProvider';
 
 const Profile: NextPage = () => {
   const { user, isLoading } = useGetProfileData();
-
+  const uset = useUserContext();
+  console.log(uset);
   // FIXME: Add react loading
   if (isLoading) {
     return <h1>Loading...</h1>;

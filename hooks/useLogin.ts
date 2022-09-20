@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { LOGIN } from '@graphql/client/queries/accounts';
 import { useRouter } from 'next/router';
-import { useToggleLoginContext, useUserContext } from 'providers/UserProvider';
+import { useToggleLoginContext } from 'providers/UserProvider';
 
 interface UseLoginProps {
   email: string;
@@ -19,7 +19,7 @@ const useLogin = () => {
   });
   const router = useRouter();
 
-  const toggleLogin = useToggleLoginContext();
+  const { userLogin } = useToggleLoginContext();
 
   const login = async ({ email, password }: UseLoginProps) => {
     const {
@@ -27,7 +27,7 @@ const useLogin = () => {
     } = await refetch({ email, password });
 
     if (userData) {
-      toggleLogin({ id: userData.id, name: userData.name, email });
+      userLogin({ id: userData.id, name: userData.name, email });
       router.push('/artworks');
     }
   };

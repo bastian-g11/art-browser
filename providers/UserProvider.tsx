@@ -18,25 +18,44 @@ interface UserProviderProps {
 const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<UserContext | null>();
 
-  const toggleLogin = useCallback(
-    (userData: UserContext): void => {
-      console.log('Entra');
-      if (user) {
-        setUser(null);
-      } else {
-        setUser({
-          id: userData?.id,
-          email: userData?.email,
-          name: userData?.name,
-        });
-      }
-    },
-    [user]
-  );
+  const userLogin = (userData: UserContext): void => {
+    console.log('Login');
+    if (user) {
+      setUser(null);
+    } else {
+      setUser({
+        id: userData?.id,
+        email: userData?.email,
+        name: userData?.name,
+      });
+    }
+  };
+
+  const userLogout = (): void => {
+    if (user) {
+      setUser(null);
+    }
+  };
+
+  // const toggleLogin = useCallback(
+  //   (userData: UserContext): void => {
+  //     console.log('Entra');
+  //     if (user) {
+  //       setUser(null);
+  //     } else {
+  //       setUser({
+  //         id: userData?.id,
+  //         email: userData?.email,
+  //         name: userData?.name,
+  //       });
+  //     }
+  //   },
+  //   [user]
+  // );
 
   return (
     <userContext.Provider value={user}>
-      <toggleLoginContext.Provider value={toggleLogin}>
+      <toggleLoginContext.Provider value={{ userLogin, userLogout }}>
         {children}
       </toggleLoginContext.Provider>
     </userContext.Provider>
