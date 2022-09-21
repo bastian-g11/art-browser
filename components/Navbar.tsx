@@ -11,7 +11,7 @@ const Navbar = () => {
   const { pathname } = useRouter();
 
   return (
-    <nav className='font-sans flex flex-row text-left py-4 px-40 justify-between bg-white shadow sm:items-baseline w-full'>
+    <nav className='font-sans flex flex-row text-left py-4 px-8 justify-between bg-white shadow sm:items-baseline w-full'>
       {pathname !== '/artworks' && (
         <div className='hover:cursor-pointer'>
           <Link href='/artworks'>
