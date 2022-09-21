@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { getAuthors } from 'services/getAuthors';
 
@@ -12,7 +12,13 @@ const promiseOptions = (inputValue: string) => {
   return getAuthors(query);
 };
 
-const Selector = ({ queryValue, setQueryValue, onSubmit }) => {
+interface SelectorProps {
+  queryValue: string;
+  setQueryValue: Dispatch<SetStateAction<string>>;
+  onSubmit: () => void;
+}
+
+const Selector = ({ queryValue, setQueryValue, onSubmit }: SelectorProps) => {
   const [inputLocalValue, setInputLocalValue] = useState('');
   const [selectedValue, setSelectedValue] = useState<AuthorOption>();
 
