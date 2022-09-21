@@ -19,7 +19,6 @@ const useFetchArtworks = () => {
     fetchPolicy: 'cache-and-network',
   });
 
-  // TODO: Pass in page number as args and isSearch to reset the images displayed
   const search = async (query: string) => {
     setIsLoading(true);
     const fetchedArtworks = await getArtworks(query);
@@ -29,7 +28,6 @@ const useFetchArtworks = () => {
       fetchedArtworks.apiIds
     );
 
-    // FIXME: With pagination do [...artworks, images]
     setArtworks(mappedArtworks);
     setIsLoading(false);
   };
@@ -40,6 +38,7 @@ const useFetchArtworks = () => {
   ) => {
     const {
       data: { getFavoriteArtworksIn },
+      // @ts-ignore
     } = await refetch({ getFavoriteArtworksInId: user.id, apiIds });
 
     const favArtworksApiIds = getFavoriteArtworksIn.map(

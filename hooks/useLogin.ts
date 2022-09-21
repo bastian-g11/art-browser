@@ -18,7 +18,6 @@ const useLogin = () => {
       password: '',
     },
     skip: true,
-    // fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   });
   const router = useRouter();

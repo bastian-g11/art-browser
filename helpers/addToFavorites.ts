@@ -26,6 +26,7 @@ const addToFavorites = async ({
     await addArtworkToUser({
       variables: {
         addArtworkToUserId: userId,
+        // @ts-ignore
         artwork: {
           api_id,
           title,

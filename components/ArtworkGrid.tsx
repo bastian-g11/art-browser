@@ -23,6 +23,7 @@ const ArtworkGrid = ({
           <ArtworkItem
             key={nanoid()}
             artwork={artwork}
+            // @ts-ignore
             userId={user.id}
             isProfile={isProfile}
           />

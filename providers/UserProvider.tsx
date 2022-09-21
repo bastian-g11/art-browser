@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useState, useContext } from 'react';
 
 const userContext = React.createContext(null);
@@ -40,7 +41,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   return (
+    // @ts-ignore
     <userContext.Provider value={user}>
+      {/* @ts-ignore */}
       <toggleLoginContext.Provider value={{ userLogin, userLogout }}>
         {children}
       </toggleLoginContext.Provider>

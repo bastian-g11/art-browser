@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { NextPage } from 'next/types';
 import Image from 'next/image';
 import { useLogin } from 'hooks/useLogin';
