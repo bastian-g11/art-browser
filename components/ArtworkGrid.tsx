@@ -24,7 +24,7 @@ const ArtworkGrid = ({
             key={nanoid()}
             artwork={artwork}
             // @ts-ignore
-            userId={user.id}
+            userId={user?.id}
             isProfile={isProfile}
           />
         ))}
