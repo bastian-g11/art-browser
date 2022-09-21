@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { NextPage } from 'next/types';
 import Image from 'next/image';
 import { useLogin } from 'hooks/useLogin';
 import Head from 'next/head';
+import ReactLoading from 'react-loading';
 
 // {/* <div className='relative h-screen translate-x-1/2'>
 //   <Image
@@ -19,13 +20,20 @@ const Login: NextPage = () => {
     password: '',
   });
 
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const { login } = useLogin();
 
   const onSubmit = (event?: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
+    setIsLoading(true);
     login({
       email: formData.email,
       password: formData.password,
+      setIsLoading,
+      setErrorMessage,
     });
   };
 
@@ -70,7 +78,7 @@ const Login: NextPage = () => {
               >
                 Password
                 <input
-                  className='shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
+                  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline'
                   id='password'
                   type='password'
                   name='password'
@@ -79,17 +87,24 @@ const Login: NextPage = () => {
                   onChange={onChange}
                 />
               </label>
-              <p className='text-red-500 text-xs italic'>
-                Please choose a password.
-              </p>
+              <p className='text-red-500 text-xs italic'>{errorMessage}</p>
             </div>
             <div className='flex justify-center'>
-              <button
-                className='bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-                type='submit'
-              >
-                Sign In
-              </button>
+              {isLoading ? (
+                <ReactLoading
+                  type='spin'
+                  color='#CC9F54'
+                  height={40}
+                  width={40}
+                />
+              ) : (
+                <button
+                  className='bg-orange-500 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                  type='submit'
+                >
+                  Sign In
+                </button>
+              )}
             </div>
           </form>
           <p className='text-center text-gray-500 text-xs'>
