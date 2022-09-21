@@ -2,10 +2,7 @@
 import React, { useState, useContext } from 'react';
 
 const userContext = React.createContext(null);
-const toggleLoginContext = React.createContext(
-  ({ userLogin, userLogout }: { userLogin: (userData: UserContext) => void }) =>
-    null
-);
+const toggleLoginContext = React.createContext(() => null);
 
 const useUserContext = () => useContext(userContext);
 const useToggleLoginContext = () => useContext(toggleLoginContext);
