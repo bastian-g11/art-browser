@@ -23,21 +23,21 @@ const ArtworkModal = ({ modalIsOpen, closeModal, artwork }) => {
       contentLabel='Example Modal'
       ariaHideApp={false}
     >
-      <div>
-        <button type='button' onClick={closeModal}>
-          close
+      <div className='max-w-[90vw]'>
+        <button type='button' onClick={closeModal} className='px-4'>
+          <img src='/icons/exit.svg' alt='Exit icon' className='h-6' />
         </button>
         <div className='flex justify-center'>
           <img
             src={img_link}
-            className='object-cover max-h-[80vh] max-w-[80vh]'
+            className='object-cover max-h-[80vh] max-w-[80vw]'
             alt='Artwork'
           />
         </div>
-        <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900'>
+        <h5 className='px-4 mb-2 text-2xl font-bold tracking-tight text-gray-900'>
           {title}
         </h5>
-        <p className='mb-3 font-normal text-gray-700'>{author}</p>
+        <p className='px-4 mb-3 font-normal text-gray-700'>{author}</p>
       </div>
     </Modal>
   );

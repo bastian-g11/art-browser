@@ -37,14 +37,17 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
     <form id='search-form' action='' onSubmit={onSubmit}>
       <div className='flex w-full flex-col items-center'>
         <p className='text-base'>Search by: </p>
-        {/* FIXME: Select one radio button by default */}
         <div className='flex justify-center mb-4'>
-          <label htmlFor='searchByTitle'>
+          <label
+            className='flex items-center ml-4 align-sub text-gray-900'
+            htmlFor='searchByTitle'
+          >
             Artwork title
             <input
               type='radio'
               name='searchBy'
               value='title'
+              checked={!isSearchByAuthor}
               className='w-4 h-4 ml-2 text-blue-600 bg-gray-100 border-gray-300'
               onClick={() => setIsSearchByAuthor(false)}
               onChange={handleSearchTypeChange}
@@ -52,8 +55,8 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
           </label>
           <div className='flex align-baseline'>
             <label
+              className='flex items-center ml-4 align-sub text-gray-900'
               htmlFor='searchByAuthor'
-              className='ml-4 align-sub text-gray-900'
             >
               Author&apos;s name
               <input
