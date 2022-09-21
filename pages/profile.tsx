@@ -18,7 +18,9 @@ const Profile: NextPage = () => {
     <>
       <Navbar />
       <div className='container  mx-auto px-4 md:px-12 my-4'>
+        {/* @ts-ignore */}
         <h2 className='text-4xl font-semibold'>{user?.name}</h2>
+        {/* @ts-ignore */}
         <p>{user?.email}</p>
         <p className='font-semibold mt-4'>Favorite Artworks</p>
       </div>

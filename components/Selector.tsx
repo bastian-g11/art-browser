@@ -19,7 +19,7 @@ interface SelectorProps {
 }
 
 const Selector = ({ queryValue, setQueryValue, onSubmit }: SelectorProps) => {
-  const [inputLocalValue, setInputLocalValue] = useState('');
+  const [, setInputLocalValue] = useState('');
   const [selectedValue, setSelectedValue] = useState<AuthorOption>();
 
   const handleInputChange = (value: string) => {
@@ -45,6 +45,7 @@ const Selector = ({ queryValue, setQueryValue, onSubmit }: SelectorProps) => {
       value={selectedValue}
       loadOptions={promiseOptions}
       onInputChange={handleInputChange}
+      // @ts-ignore
       onChange={handleChange}
     />
   );
