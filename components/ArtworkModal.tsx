@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Modal from 'react-modal';
+import { Artwork } from 'types';
 
 const customStyles = {
   content: {
@@ -11,7 +12,18 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
   },
 };
-const ArtworkModal = ({ modalIsOpen, closeModal, artwork }) => {
+
+interface ArtworkModalProps {
+  modalIsOpen: boolean;
+  closeModal: () => void;
+  artwork: Artwork;
+}
+
+const ArtworkModal = ({
+  modalIsOpen,
+  closeModal,
+  artwork,
+}: ArtworkModalProps) => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, author, img_link } = artwork;
 
