@@ -14,6 +14,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@prisma/client": "^4.2.1",
+    "@types/react-modal": "^3.13.1",
     "apollo-server-micro": "^3.10.1",
     "apollo3-cache-persist": "^0.14.1",
     "graphql": "^16.6.0",
@@ -24,6 +25,7 @@
     "nextjs-cors": "^2.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-modal": "^3.15.1",
     "react-select": "^5.4.0",
     "superjson": "^1.9.1"
   },

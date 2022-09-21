@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @next/next/no-img-element */
 import { useMutation } from '@apollo/client';
 import { useState } from 'react';
@@ -7,6 +9,7 @@ import {
 } from '@graphql/client/mutations/users';
 import { Artwork } from 'types';
 import { addToFavorites, removeFromFavorites } from 'helpers';
+import { ArtworkModal } from 'components/ArtworkModal';
 
 const ArtworkItem = ({
   artwork,
@@ -21,6 +24,15 @@ const ArtworkItem = ({
   const { api_id, title, author, site_link, img_link, isFavorite } = artwork;
 
   const [checkedAsFavorite, setCheckedAsFavorite] = useState(isFavorite);
+  const [modalIsOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const [addArtworkToUser, { loading: savingAtwork }] = useMutation(
     ADD_ARTWORK_TO_USER
@@ -45,7 +57,10 @@ const ArtworkItem = ({
 
   return (
     <div className='my-1 px-1 w-full md:w-1/2 lg:my-4 lg:w-1/3 bg-white border border-gray-200 shadow-md '>
-      <div className='aspect-square'>
+      <div
+        className={`aspect-square ${isProfile ? 'hover:cursor-pointer' : ''}`}
+        onClick={isProfile ? openModal : undefined}
+      >
         <img
           src={img_link}
           className='object-cover h-full w-full'
@@ -87,19 +102,15 @@ const ArtworkItem = ({
                   />
                 )}
               </div>
-            )
-
-            // <input
-            //   type='checkbox'
-            //   name='addToFavorites'
-            //   id='addToFavorites'
-            //   checked={checkedAsFavorite}
-            //   onChange={toggleAddToFavorites}
-            // />
-            }
+            )}
           </div>
         </div>
       )}
+      <ArtworkModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        artwork={artwork}
+      />
     </div>
   );
 };
