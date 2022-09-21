@@ -48,7 +48,7 @@ const SearchForm = ({ onInputSubmit }: SearchFormProps) => {
               name='searchBy'
               value='title'
               checked={!isSearchByAuthor}
-              className='w-4 h-4 ml-2 text-blue-600 bg-gray-100 border-gray-300'
+              className='w-4 h-4 ml-2 text-orange-500 bg-gray-100 border-gray-300'
               onClick={() => setIsSearchByAuthor(false)}
               onChange={handleSearchTypeChange}
             />

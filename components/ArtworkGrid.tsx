@@ -17,9 +17,7 @@ const ArtworkGrid = ({
     <div className='container mb-12 mx-auto px-4 md:px-12'>
       <div className='flex flex-wrap -mx-1 lg:-mx-4'>
         {artworks.length === 0 && (
-          <p className=' m-auto py-4 text-gray-500'>
-            No images found? Try again
-          </p>
+          <p className=' m-auto py-4 text-gray-500'>No images found</p>
         )}
         {artworks.map((artwork: Artwork) => (
           <ArtworkItem
