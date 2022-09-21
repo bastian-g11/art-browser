@@ -1,7 +1,6 @@
 import prisma from '@config/prisma';
 import { Resolver } from 'types';
 
-// FIXME: Abstract to a different file
 const accountReturnedFields = {
   id: true,
   email: true,

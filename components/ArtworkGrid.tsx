@@ -9,14 +9,13 @@ const ArtworkGrid = ({
   isProfile,
 }: {
   artworks: Artwork[];
-  isProfile: true;
+  isProfile: boolean;
 }) => {
   const user = useUserContext();
 
   return (
     <div className='container mb-12 mx-auto px-4 md:px-12'>
       <div className='flex flex-wrap -mx-1 lg:-mx-4'>
-        {/* TODO: Don't display text if not search is done */}
         {artworks.length === 0 && (
           <p className=' m-auto py-4 text-gray-500'>
             No images found? Try again
